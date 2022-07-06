@@ -1,0 +1,9 @@
+[Unit]
+Description=Webservice to manage tempsensor
+[Service]
+ExecStart=/home/pi/bin/webserver
+Restart=on-failure
+RestartSec=1s
+Environment="PORT=:1111"
+[Install]
+WantedBy=default.target

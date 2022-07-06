@@ -1,0 +1,44 @@
+- Logs begin at Thu 2022-01-20 19:17:03 CET, end at Sun 2022-01-23 19:37:00 CET. --
+Jan 20 19:20:54 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 20 19:20:55 raspberrypi start_sensor.sh[312]: Start
+Jan 20 19:20:56 raspberrypi start_sensor.sh[312]: Post "http://192.168.1.229:8086/api/v2/write?bucket=telegraf&org=telegraf&precision=ns": dial tcp 192.168.1.229:8086: connect: network is unreachable
+Jan 20 19:20:56 raspberrypi systemd[1]: tempsensor.service: Succeeded.
+Jan 20 19:38:38 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 20 19:38:38 raspberrypi start_sensor.sh[495]: Start
+Jan 20 20:25:41 raspberrypi start_sensor.sh[495]: panic: runtime error: index out of range [1] with length 1
+Jan 20 20:25:41 raspberrypi start_sensor.sh[495]: goroutine 1 [running]:
+Jan 20 20:25:41 raspberrypi start_sensor.sh[495]: pi/sensor/module.parse_value({0x0, 0x0})
+Jan 20 20:25:41 raspberrypi start_sensor.sh[495]:         /home/fredrik/devel/GoLek/sensor_v1/module/read_sensor.go:27 +0x138
+Jan 20 20:25:41 raspberrypi start_sensor.sh[495]: pi/sensor/module.ReadSensor({0x1012300, 0x2c})
+Jan 20 20:25:41 raspberrypi start_sensor.sh[495]:         /home/fredrik/devel/GoLek/sensor_v1/module/read_sensor.go:15 +0x68
+Jan 20 20:25:41 raspberrypi start_sensor.sh[495]: main.main()
+Jan 20 20:25:41 raspberrypi start_sensor.sh[495]:         /home/fredrik/devel/GoLek/sensor_v1/main.go:34 +0x22c
+Jan 20 20:25:41 raspberrypi systemd[1]: tempsensor.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Jan 20 20:25:41 raspberrypi systemd[1]: tempsensor.service: Failed with result 'exit-code'.
+Jan 20 22:45:39 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 20 22:45:39 raspberrypi start_sensor.sh[845]: Start
+Jan 20 22:46:00 raspberrypi start_sensor.sh[845]: Post "http://192.168.1.229:8086/api/v2/write?bucket=telegraf&org=telegraf&precision=ns": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+Jan 20 22:46:00 raspberrypi systemd[1]: tempsensor.service: Succeeded.
+Jan 20 22:46:44 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 20 22:46:44 raspberrypi start_sensor.sh[856]: Start
+Jan 20 22:47:05 raspberrypi start_sensor.sh[856]: Post "http://192.168.1.229:8086/api/v2/write?bucket=telegraf&org=telegraf&precision=ns": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+Jan 20 22:47:05 raspberrypi systemd[1]: tempsensor.service: Succeeded.
+Jan 20 22:57:52 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 20 22:57:52 raspberrypi start_sensor.sh[926]: Start
+Jan 20 22:58:39 raspberrypi systemd[1]: /etc/systemd/system/tempsensor.service:5: Failed to parse service restart specifier, ignoring: on-faliure
+Jan 20 22:58:46 raspberrypi systemd[1]: Stopping Mqtt service to post/log temperature...
+Jan 20 22:58:46 raspberrypi systemd[1]: tempsensor.service: Main process exited, code=killed, status=15/TERM
+Jan 20 22:58:46 raspberrypi systemd[1]: tempsensor.service: Succeeded.
+Jan 20 22:58:46 raspberrypi systemd[1]: Stopped Mqtt service to post/log temperature.
+Jan 20 22:58:46 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 20 22:58:46 raspberrypi start_sensor.sh[953]: Start
+Jan 21 05:30:58 raspberrypi start_sensor.sh[953]: Post "http://192.168.1.229:8086/api/v2/write?bucket=telegraf&org=telegraf&precision=ns": dial tcp 192.168.1.229:8086: i/o timeout
+Jan 21 05:30:58 raspberrypi systemd[1]: tempsensor.service: Succeeded.
+Jan 23 17:03:21 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 23 17:03:21 raspberrypi start_sensor.sh[5030]: Start
+Jan 23 17:05:15 raspberrypi systemd[1]: Stopping Mqtt service to post/log temperature...
+Jan 23 17:05:15 raspberrypi systemd[1]: tempsensor.service: Main process exited, code=killed, status=15/TERM
+Jan 23 17:05:15 raspberrypi systemd[1]: tempsensor.service: Succeeded.
+Jan 23 17:05:15 raspberrypi systemd[1]: Stopped Mqtt service to post/log temperature.
+Jan 23 17:05:15 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 23 17:05:15 raspberrypi start_sensor.sh[5071]: Start

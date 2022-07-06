@@ -1,0 +1,11 @@
+● tempsensor.service - Mqtt service to post/log temperature
+   Loaded: loaded (/etc/systemd/system/tempsensor.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sun 2022-01-23 21:30:19 CET; 14min ago
+ Main PID: 5425 (start_sensor.sh)
+    Tasks: 5 (limit: 881)
+   CGroup: /system.slice/tempsensor.service
+           ├─5425 /bin/bash /home/pi/bin/start_sensor.sh
+           └─5426 /home/pi/bin/sensor
+
+Jan 23 21:30:19 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 23 21:30:19 raspberrypi start_sensor.sh[5425]: Start

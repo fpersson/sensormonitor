@@ -1,0 +1,11 @@
+● tempsensor.service - Mqtt service to post/log temperature
+   Loaded: loaded (/etc/systemd/system/tempsensor.service; enabled; vendor preset: enabled)
+   Active: failed (Result: exit-code) since Sun 2022-01-23 20:34:33 CET; 54min ago
+  Process: 5071 ExecStart=/home/pi/bin/start_sensor.sh (code=exited, status=255/EXCEPTION)
+ Main PID: 5071 (code=exited, status=255/EXCEPTION)
+
+Jan 23 17:05:15 raspberrypi systemd[1]: Started Mqtt service to post/log temperature.
+Jan 23 17:05:15 raspberrypi start_sensor.sh[5071]: Start
+Jan 23 20:34:33 raspberrypi start_sensor.sh[5071]: Post "http://192.168.1.229:8086/api/v2/write?bucket=telegraf&org=telegraf&precision=ns": dial tcp 192.168.1.229:8086: i/o timeout
+Jan 23 20:34:33 raspberrypi systemd[1]: tempsensor.service: Main process exited, code=exited, status=255/EXCEPTION
+Jan 23 20:34:33 raspberrypi systemd[1]: tempsensor.service: Failed with result 'exit-code'.
