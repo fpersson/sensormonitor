@@ -1,9 +1,9 @@
 [Unit]
-Description=Webservice to manage tempsensor
+Description=Service to start/stop demo microservice
 [Service]
-ExecStart=/home/pi/bin/webserver
+Environment="CONFIG=/opt"
+ExecStart=/usr/bin/demo
 Restart=on-failure
 RestartSec=1s
-Environment="PORT=:1111"
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target

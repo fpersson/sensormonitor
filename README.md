@@ -1,5 +1,17 @@
 # How-to.
 
+## OpenSuSE
+This is the easy way....
+
+``` bash
+    sudo zypper addrepo -f https://download.opensuse.org/repositories/home:fpersson/openSUSE_Tumbleweed/home:fpersson.repo
+    sudo zypper refresh
+    sudo zypper --gpg-auto-import-keys ref
+    sudo zypper install demo
+    sudo systemctl enable webserver.service
+    sudo systemctl start webserver.service
+```
+
 ## Build/install
 ``` bash
     go install
