@@ -47,7 +47,7 @@ Default path for config files is $XDG_DATA_DIRS/tempsensor
 
 #### Test with html
 ``` bash
-    HTML="./" CONFIG="./testdata/" $HOME/go/bin/webserver
+    PORT=":1111" HTML="./" CONFIG="./testdata/" $HOME/go/bin/webserver
 ```
 
 Vistit localhost:1111 with your browser

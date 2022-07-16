@@ -2,7 +2,6 @@ package syscmd
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"strings"
 )
@@ -11,19 +10,24 @@ var OsRelease = map[string]string{}
 
 const OsReleasePath = "/etc/os-release"
 
-func GetOsOsReleaseHTML() string {
-	osinfo := ParseOsRelease(OsReleasePath)
-	result := "<b>Hostsystem: </b>" + osinfo["NAME"] + " <b>OS version:</b> " + osinfo["VERSION_ID"] + "<br/>"
-	return result
+func GetOsOsReleaseHTML() (string, error) {
+	osinfo, err := ParseOsRelease(OsReleasePath)
+	var result string
+
+	if err != nil {
+		result = "<b>Hostsystem: </b>Unkown <b>OS version:</b> unkown<br/>"
+	}
+
+	result = "<b>Hostsystem: </b>" + osinfo["NAME"] + " <b>OS version:</b> " + osinfo["VERSION_ID"] + "<br/>"
+	return result, err
 }
 
-func ParseOsRelease(file string) (osrelease map[string]string) {
-	fmt.Println("parsing: " + file)
+func ParseOsRelease(file string) (osrelease map[string]string, err error) {
 	var result = make(map[string]string)
 	readFile, err := os.Open(file)
 
 	if err != nil {
-		fmt.Println(err)
+		return result, err
 	}
 
 	defer readFile.Close()
@@ -38,5 +42,5 @@ func ParseOsRelease(file string) (osrelease map[string]string) {
 		result[value[0]] = strings.Trim(value[1], "\"")
 	}
 
-	return result
+	return result, nil
 }

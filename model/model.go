@@ -2,7 +2,6 @@ package model
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"os"
 )
@@ -66,22 +65,27 @@ type RebootPage struct {
 	FooterData FooterData //This is needed on every page
 }
 
-func checkError(err error) {
-	if err != nil {
-		fmt.Println(err)
-	}
-}
-
-func ListAllSettings() (settings Settings) {
+//@todo move this code and write a test
+func ListAllSettings() (settings Settings, err error) {
 	var result Settings
+
 	jsonFile, err := os.Open(SettingsPath)
-	checkError(err)
-	b, err := ioutil.ReadAll(jsonFile)
-	checkError(err)
-	err = json.Unmarshal(b, &result)
+
 	if err != nil {
-		fmt.Println("Error: ", err)
+		return result, err
 	}
 
-	return result
+	b, err := ioutil.ReadAll(jsonFile)
+
+	if err != nil {
+		return result, err
+	}
+
+	err = json.Unmarshal(b, &result)
+
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }

@@ -1,13 +1,17 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"example/user/webserver/handlers"
 	"example/user/webserver/model"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"strings"
+	"time"
 )
 
 const configfile = "tempsensor/settings.json"
@@ -34,9 +38,12 @@ func findConfigFile(configpaths string) (confile string) {
 }
 
 func main() {
+	logger := log.New(os.Stdout, "sensor-monitor: ", log.LstdFlags)
 	port := os.Getenv("PORT")
 	configdir := os.Getenv("CONFIG")
 	model.HttpDir = os.Getenv("HTML")
+
+	serveMux := http.NewServeMux()
 
 	if port == "" {
 		port = ":8080"
@@ -45,25 +52,62 @@ func main() {
 	if configdir == "" {
 		configdir = os.Getenv("XDG_DATA_DIRS")
 	}
+	logger.Println(configdir)
 	model.SettingsPath = findConfigFile(configdir)
 
 	if model.SettingsPath == "" {
-		fmt.Println("ERROR: " + configfile + " not found in " + configdir)
+		logger.Println("ERROR: " + configfile + " not found in " + configdir)
 	}
 
 	if model.HttpDir == "" {
 		model.HttpDir = http_path
 	}
 
-	fmt.Println("Starting at localhost" + port)
-	fmt.Println("Http dir: " + model.HttpDir)
-	http.HandleFunc("/", handlers.StatusFunc)
-	http.HandleFunc("/update", handlers.UpdateSettings)
-	http.HandleFunc("/settings.html", handlers.SettingsFunc)
-	http.HandleFunc("/restart.html", handlers.RebootFunc)
-	http.HandleFunc("/status.html", handlers.StatusFunc)
-	http.HandleFunc("/log.html", handlers.LogFunc)
-	http.HandleFunc("/restart_webui", handlers.RestartWebui)
-	http.HandleFunc("/restart_sensor", handlers.RestartSensor)
-	http.ListenAndServe(port, nil)
+	logger.Println("Starting at localhost" + port)
+	logger.Println("Http dir: " + model.HttpDir)
+
+	indexPageHandler := handlers.NewIndexPage(logger)
+	logHandler := handlers.NewLogHandle(logger)
+	restartHandler := handlers.NewReboot(logger)
+	restartSensorHandler := handlers.NewRestartSensor(logger)
+	restartWebuiHandler := handlers.NewRestartWebui(logger)
+	settingsHandler := handlers.NewSettingsHandler(logger)
+	updateSettingsHandler := handlers.NewUpdateSettings(logger)
+
+	serveMux.Handle("/", indexPageHandler)
+	serveMux.Handle("/log.html", logHandler)
+	serveMux.Handle("/restart.html", restartHandler)
+	serveMux.Handle("/restart_sensor", restartSensorHandler)
+	serveMux.Handle("/restart_webui", restartWebuiHandler)
+	serveMux.Handle("/settings.html", settingsHandler)
+	serveMux.Handle("/status.html", indexPageHandler)
+	serveMux.Handle("/update", updateSettingsHandler)
+
+	server := &http.Server{
+		Addr:         port,
+		Handler:      serveMux,
+		IdleTimeout:  120 * time.Second,
+		ReadTimeout:  1 * time.Second,
+		WriteTimeout: 1 * time.Second,
+	}
+
+	go func() {
+		err := server.ListenAndServe()
+		if err != nil {
+			logger.Fatal(err)
+		}
+	}()
+
+	sigChan := make(chan os.Signal)
+	signal.Notify(sigChan, os.Interrupt)
+	signal.Notify(sigChan, os.Kill)
+
+	sig := <-sigChan
+	logger.Println("Sigterm: ", sig)
+	tc, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	server.Shutdown(tc)
+
+	logger.Println("** EXIT **")
 }

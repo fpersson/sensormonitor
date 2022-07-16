@@ -14,7 +14,7 @@ func TestParseOsRelease(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		got := ParseOsRelease(c.in)
+		got, _ := ParseOsRelease(c.in)
 		if got["NAME"] != c.wants["NAME"] {
 			t.Errorf("ParseOsRelease(%q) == %q, wants %q", c.in, got["NAME"], c.wants["NAME"])
 		}
