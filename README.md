@@ -1,3 +1,5 @@
+![example workflow](https://github.com/fpersson/sensormonitor/actions/workflows/go.yml/badge.svg)
+
 # How-to.
 
 ## OpenSuSE
