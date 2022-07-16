@@ -16,12 +16,6 @@ func ReadLog() (data *model.AllMessages, err error) {
 
 	cmd := exec.Command(prg, arg, arg2)
 
-	/*
-		prg := "cat"
-		arg := "./testdata/fejklog.txt"
-
-		cmd := exec.Command(prg, arg)
-	*/
 	stdout, err := cmd.Output()
 
 	if err != nil {
@@ -46,12 +40,6 @@ func ReadStatus() (status *model.SystemdStatus) {
 
 	cmd := exec.Command(prg, arg, arg2)
 
-	/*
-		prg := "cat"
-		arg := "./testdata/systemd_fejk_ok.txt"
-
-		cmd := exec.Command(prg, arg)
-	*/
 	stdout, err := cmd.Output()
 
 	if err != nil {

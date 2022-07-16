@@ -26,6 +26,8 @@ func ParseOsRelease(file string) (osrelease map[string]string) {
 		fmt.Println(err)
 	}
 
+	defer readFile.Close()
+
 	fileScanner := bufio.NewScanner(readFile)
 
 	fileScanner.Split(bufio.ScanLines)
@@ -35,8 +37,6 @@ func ParseOsRelease(file string) (osrelease map[string]string) {
 		value := strings.Split(line, "=")
 		result[value[0]] = strings.Trim(value[1], "\"")
 	}
-
-	readFile.Close()
 
 	return result
 }

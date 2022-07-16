@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"os/user"
 	"strings"
 )
 
@@ -55,13 +54,6 @@ func main() {
 	if model.HttpDir == "" {
 		model.HttpDir = http_path
 	}
-
-	user, err := user.Current()
-	if err != nil {
-		fmt.Printf("Error:" + err.Error())
-	}
-
-	fmt.Printf("Username: %s - Uid; %s - Gid %s\n", user.Username, user.Uid, user.Gid)
 
 	fmt.Println("Starting at localhost" + port)
 	fmt.Println("Http dir: " + model.HttpDir)

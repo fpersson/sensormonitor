@@ -77,8 +77,11 @@ func ListAllSettings() (settings Settings) {
 	jsonFile, err := os.Open(SettingsPath)
 	checkError(err)
 	b, err := ioutil.ReadAll(jsonFile)
-	json.Unmarshal(b, &result)
 	checkError(err)
+	err = json.Unmarshal(b, &result)
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
 
 	return result
 }

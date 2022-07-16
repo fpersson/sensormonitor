@@ -37,7 +37,12 @@ func UpdateSettings(w http.ResponseWriter, r *http.Request) {
 
 		data, err := json.MarshalIndent(&settings, "", "	")
 		checkError(err)
-		ioutil.WriteFile(model.SettingsPath, data, 0666)
+		err = ioutil.WriteFile(model.SettingsPath, data, 0666)
+
+		if err != nil {
+			fmt.Println("Error ", err)
+		}
+
 		http.Redirect(w, r, "/", 301)
 	}
 }
