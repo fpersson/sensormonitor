@@ -3,5 +3,5 @@ rebuild master:
     - rebuild_package:
     project: home:fpersson
     package: sensormonitor
-  filter:
+  filters:
     event: push
