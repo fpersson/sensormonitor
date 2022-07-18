@@ -1,7 +1,7 @@
 rebuild master:
   steps:
     - rebuild_package:
-    project: home:fpersson
-    package: sensormonitor
+      project: home:fpersson
+      package: sensormonitor
   filters:
     event: push
