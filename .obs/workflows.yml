@@ -4,4 +4,4 @@ workflow:
         project: home:fpersson
         package: sensormonitor
   filters:
-    event: push
+    event: push_tag
