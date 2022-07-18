@@ -20,6 +20,7 @@ This is the way.... This install is based on latest taged version.
 ```
 
 ## Running 
+
 ### run with default settings
 * PORT: 8080
 * COFIG: $XDG_DATA_DIRS
