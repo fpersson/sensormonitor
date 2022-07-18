@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"example/user/webserver/model"
-	"example/user/webserver/syscmd"
 	"html/template"
 	"log"
 	"net/http"
+	"sensormonitor/model"
+	"sensormonitor/syscmd"
 )
 
 type SettingsHandler struct {

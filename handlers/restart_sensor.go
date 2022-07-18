@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"example/user/webserver/syscmd"
 	"log"
 	"net/http"
+	"sensormonitor/syscmd"
 )
 
 type RestartSensor struct {

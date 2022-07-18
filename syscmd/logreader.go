@@ -1,8 +1,8 @@
-package logreader
+package syscmd
 
 import (
-	"example/user/webserver/model"
 	"os/exec"
+	"sensormonitor/model"
 	"strings"
 )
 

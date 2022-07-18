@@ -6,8 +6,6 @@ import (
 	"strings"
 )
 
-var OsRelease = map[string]string{}
-
 const OsReleasePath = "/etc/os-release"
 
 func GetOsOsReleaseHTML() (string, error) {

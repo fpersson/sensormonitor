@@ -1,12 +1,11 @@
 package handlers
 
 import (
-	"example/user/webserver/logreader"
-	"example/user/webserver/model"
-	"example/user/webserver/syscmd"
 	"html/template"
 	"log"
 	"net/http"
+	"sensormonitor/model"
+	"sensormonitor/syscmd"
 )
 
 type LogHandle struct {
@@ -30,7 +29,7 @@ func (logHandle *LogHandle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	logPage.FooterData.OsVersion = osinfo["VERSION_ID"]
 
 	logHandle.logger.Println("Reading logs")
-	data, err := logreader.ReadLog()
+	data, err := syscmd.ReadLog()
 	if err != nil {
 		logHandle.logger.Println(err)
 	}

@@ -1,8 +1,8 @@
 [Unit]
-Description=Service to start/stop demo microservice
+Description=Service to start/stop sensormonitor microservice
 [Service]
 Environment="CONFIG=/opt"
-ExecStart=/usr/bin/demo
+ExecStart=/usr/bin/sensormonitor
 Restart=on-failure
 RestartSec=1s
 [Install]

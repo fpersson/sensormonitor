@@ -1,3 +1,3 @@
-module example/user/webserver
+module sensormonitor
 
 go 1.18

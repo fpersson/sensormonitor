@@ -1,12 +1,11 @@
 package handlers
 
 import (
-	"example/user/webserver/logreader"
-	"example/user/webserver/model"
-	"example/user/webserver/syscmd"
 	"html/template"
 	"log"
 	"net/http"
+	"sensormonitor/model"
+	"sensormonitor/syscmd"
 )
 
 //IndexPage handeler
@@ -33,7 +32,7 @@ func (indexPage *IndexPage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	statusPage.FooterData.OsVersion = osinfo["VERSION_ID"]
 
 	indexPage.logger.Println("Reading status")
-	data, err := logreader.ReadStatus()
+	data, err := syscmd.ReadStatus() //logreader.ReadStatus()
 	if err != nil {
 		indexPage.logger.Println(err)
 	}

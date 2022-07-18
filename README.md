@@ -19,37 +19,24 @@ This is the easy way....
     go install
 ```
 
-## run
+## Running 
+### run with default settings
+* PORT: 8080
+* COFIG: $XDG_DATA_DIRS
+* HTMLDIR: ./
+
 ``` bash
-    $HOME/go/bin/webserver
+    $HOME/go/bin/sensormonitor
 ```
 
-### run with port settings
+### Test mode
 ``` bash
-    PORT=":1111" $HOME/go/bin/webserver
-```
-
-### Configfiles
-Default path for config files is $XDG_DATA_DIRS/tempsensor
-
-#### Run with config
-``` bash
-    CONFIG=$HOME/<path>/ $HOME/go/bin/webserver
-```
-
-#### Test mode
-``` bash
-    PORT=":1111" CONFIG="./testdata/" $HOME/go/bin/webserver
-```
-
-### html paths (if installed)
-``` bash
-    /usr/share/demo/templates/
-```
-
-#### Test with html
-``` bash
-    PORT=":1111" HTML="./" CONFIG="./testdata/" $HOME/go/bin/webserver
+    PORT=":1111" HTML="./" CONFIG="./testdata/" $HOME/go/bin/sensormonitor
 ```
 
 Vistit localhost:1111 with your browser
+
+### html paths (if installed from repo)
+``` bash
+    /usr/share/demo/templates/
+```

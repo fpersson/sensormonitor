@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"encoding/json"
-	"example/user/webserver/model"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"sensormonitor/model"
 )
 
 //UpdateSettings Handeler

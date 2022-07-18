@@ -3,13 +3,13 @@ package main
 import (
 	"context"
 	"errors"
-	"example/user/webserver/handlers"
-	"example/user/webserver/model"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+	"sensormonitor/handlers"
+	"sensormonitor/model"
 	"strings"
 	"time"
 )
@@ -52,6 +52,7 @@ func main() {
 	if configdir == "" {
 		configdir = os.Getenv("XDG_DATA_DIRS")
 	}
+
 	logger.Println(configdir)
 	model.SettingsPath = findConfigFile(configdir)
 
