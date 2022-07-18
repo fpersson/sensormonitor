@@ -3,15 +3,15 @@
 # How-to.
 
 ## OpenSuSE
-This is the easy way....
+This is the way.... This install is based on latest taged version.
 
 ``` bash
     sudo zypper addrepo -f https://download.opensuse.org/repositories/home:fpersson/openSUSE_Tumbleweed/home:fpersson.repo
     sudo zypper refresh
     sudo zypper --gpg-auto-import-keys ref
-    sudo zypper install demo
-    sudo systemctl enable webserver.service
-    sudo systemctl start webserver.service
+    sudo zypper install sensormonitor
+    sudo systemctl enable sensormonitor.service
+    sudo systemctl start sensormonitor.service
 ```
 
 ## Build/install
@@ -38,5 +38,5 @@ Vistit localhost:1111 with your browser
 
 ### html paths (if installed from repo)
 ``` bash
-    /usr/share/demo/templates/
+    /usr/share/sensormonitor/templates/
 ```

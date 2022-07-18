@@ -15,7 +15,7 @@ import (
 )
 
 const configfile = "tempsensor/settings.json"
-const http_path = "/usr/share/demo/"
+const http_path = "/usr/share/sensormonitor/"
 
 func exists(path string) bool {
 	_, err := os.Stat(path)
