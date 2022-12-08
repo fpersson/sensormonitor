@@ -11,6 +11,7 @@ import (
 	"sensormonitor/handlers"
 	"sensormonitor/model"
 	"strings"
+	"syscall"
 	"time"
 )
 
@@ -99,9 +100,9 @@ func main() {
 		}
 	}()
 
-	sigChan := make(chan os.Signal)
+	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, os.Interrupt)
-	signal.Notify(sigChan, os.Kill)
+	signal.Notify(sigChan, syscall.SIGTERM)
 
 	sig := <-sigChan
 	logger.Println("Sigterm: ", sig)

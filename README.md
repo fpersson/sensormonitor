@@ -19,6 +19,16 @@ This is the way.... This install is based on latest taged version.
     go install
 ```
 
+### install pre-commit hook
+``` bash
+    cp ./hooks/* ./.git/hooks/
+``` 
+
+#### .bashrc
+Add GOROOT and GOPATH to your path
+``` bash
+    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+```
 ## Running 
 
 ### run with default settings
