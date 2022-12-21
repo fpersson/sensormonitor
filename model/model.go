@@ -9,7 +9,7 @@ import (
 var SettingsPath string
 var HttpDir string
 
-// struct for info to show in footer
+// FooterData struct for info to show in footer
 type FooterData struct {
 	OsString  string
 	OsVersion string
@@ -43,19 +43,19 @@ type SystemdStatus struct {
 	Message *[]string
 }
 
-//Data struct for index page
+// IndexPage Data struct for index page
 type IndexPage struct {
 	Settings   Settings
 	FooterData FooterData //This is needed on every page
 }
 
-//Data struct for log page
+// LogPage Data struct for log page
 type LogPage struct {
 	FooterData  FooterData //This is needed on every page
 	AllMessages AllMessages
 }
 
-//
+// StatusPage datastruct for the status page
 type StatusPage struct {
 	FooterData    FooterData //This is needed on every page
 	SystemdStatus SystemdStatus
@@ -65,7 +65,7 @@ type RebootPage struct {
 	FooterData FooterData //This is needed on every page
 }
 
-//@todo move this code and write a test
+// ListAllSettings @todo move this code and write a test
 func ListAllSettings() (settings Settings, err error) {
 	var result Settings
 
