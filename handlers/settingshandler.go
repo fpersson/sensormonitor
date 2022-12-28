@@ -27,6 +27,8 @@ func (settingsHandler *SettingsHandler) ServeHTTP(w http.ResponseWriter, r *http
 	idxPage.FooterData.OsString = osinfo["NAME"]
 	idxPage.FooterData.OsVersion = osinfo["VERSION_ID"]
 
+	idxPage.NavPages = GetMenu(r.URL.Path)
+
 	data, err := model.ListAllSettings()
 	if err != nil {
 		settingsHandler.logger.Println(err)
@@ -35,8 +37,9 @@ func (settingsHandler *SettingsHandler) ServeHTTP(w http.ResponseWriter, r *http
 	idxPage.Settings = data
 	settingsHandler.logger.Println("(OPEN): " + model.HttpDir + "templates/settings.html")
 
+	navbar := model.HttpDir + "templates/navbar.html"
 	footer := model.HttpDir + "templates/footer.html"
-	t, err := template.ParseFiles(model.HttpDir+"templates/settings.html", footer)
+	t, err := template.ParseFiles(model.HttpDir+"templates/settings.html", navbar, footer)
 
 	if err != nil {
 		settingsHandler.logger.Println(err)

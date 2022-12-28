@@ -15,6 +15,16 @@ type FooterData struct {
 	OsVersion string
 }
 
+type NavPage struct {
+	Name     string
+	Url      string
+	IsActive bool
+}
+
+type NavPages struct {
+	NavPage []NavPage
+}
+
 type Settings struct {
 	Sensor  string       `json:"sensor"`
 	Name    string       `json:"name"`
@@ -43,26 +53,31 @@ type SystemdStatus struct {
 	Message *[]string
 }
 
-// IndexPage Data struct for index page
+// IndexPage Data struct for index page used for settings page
 type IndexPage struct {
 	Settings   Settings
 	FooterData FooterData //This is needed on every page
+	NavPages   NavPages   //This is needed on every page
 }
 
 // LogPage Data struct for log page
 type LogPage struct {
 	FooterData  FooterData //This is needed on every page
+	NavPages    NavPages   //This is needed on every page
 	AllMessages AllMessages
 }
 
 // StatusPage datastruct for the status page
 type StatusPage struct {
+	NavPages      NavPages   //This is needed on every page
 	FooterData    FooterData //This is needed on every page
 	SystemdStatus SystemdStatus
+	//Names         *[]string
 }
 
 type RebootPage struct {
 	FooterData FooterData //This is needed on every page
+	NavPages   NavPages   //This is needed on every page
 }
 
 // ListAllSettings @todo move this code and write a test

@@ -28,8 +28,11 @@ func (reboot *Reboot) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	rebootPage.FooterData.OsString = osinfo["NAME"]
 	rebootPage.FooterData.OsVersion = osinfo["VERSION_ID"]
 
+	rebootPage.NavPages = GetMenu(r.URL.Path)
+
+	navbar := model.HttpDir + "templates/navbar.html"
 	footer := model.HttpDir + "templates/footer.html"
-	t, err := template.ParseFiles(model.HttpDir+"templates/restartPage.html", footer)
+	t, err := template.ParseFiles(model.HttpDir+"templates/restartPage.html", navbar, footer)
 
 	if err != nil {
 		reboot.logger.Println(err)

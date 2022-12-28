@@ -85,6 +85,9 @@ func main() {
 	serveMux.Handle("/status.html", indexPageHandler)
 	serveMux.Handle("/update", updateSettingsHandler)
 
+	fs := http.FileServer(http.Dir("./static"))
+	serveMux.Handle("/static/", http.StripPrefix("/static/", fs))
+
 	server := &http.Server{
 		Addr:         port,
 		Handler:      serveMux,

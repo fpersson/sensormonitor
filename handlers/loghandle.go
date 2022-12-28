@@ -28,6 +28,8 @@ func (logHandle *LogHandle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	logPage.FooterData.OsString = osinfo["NAME"]
 	logPage.FooterData.OsVersion = osinfo["VERSION_ID"]
 
+	logPage.NavPages = GetMenu(r.URL.Path)
+
 	logHandle.logger.Println("Reading logs")
 	data, err := syscmd.ReadLog()
 	if err != nil {
@@ -36,9 +38,10 @@ func (logHandle *LogHandle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	logPage.AllMessages = *data
 
+	navbar := model.HttpDir + "templates/navbar.html"
 	footer := model.HttpDir + "templates/footer.html"
 
-	t, err := template.ParseFiles(model.HttpDir+"templates/logPage.html", footer)
+	t, err := template.ParseFiles(model.HttpDir+"templates/logPage.html", navbar, footer)
 	if err != nil {
 		logHandle.logger.Println(err)
 	}

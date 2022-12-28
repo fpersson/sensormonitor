@@ -31,8 +31,10 @@ func (indexPage *IndexPage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	statusPage.FooterData.OsString = osinfo["NAME"]
 	statusPage.FooterData.OsVersion = osinfo["VERSION_ID"]
 
+	statusPage.NavPages = GetMenu(r.URL.Path)
+
 	indexPage.logger.Println("Reading status")
-	data, err := syscmd.ReadStatus() //logreader.ReadStatus()
+	data, err := syscmd.ReadStatus()
 	if err != nil {
 		indexPage.logger.Println(err)
 	}
@@ -40,18 +42,23 @@ func (indexPage *IndexPage) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	statusPage.SystemdStatus = *data
 	var temp = model.HttpDir + "templates/error.html"
 
-	if data.Active == true {
+	if data.Active {
 		indexPage.logger.Println("Systemd service works")
 		temp = model.HttpDir + "templates/message.html"
 	}
 
+	navbar := model.HttpDir + "templates/navbar.html"
 	footer := model.HttpDir + "templates/footer.html"
 
-	t, err := template.ParseFiles(model.HttpDir+"templates/statusPage.html", temp, footer)
+	t, err := template.ParseFiles(model.HttpDir+"templates/statusPage.html", temp, navbar, footer)
 
 	if err != nil {
 		indexPage.logger.Println("Error ", err)
 	}
 
-	t.Execute(w, statusPage)
+	exec_err := t.Execute(w, statusPage)
+
+	if exec_err != nil {
+		indexPage.logger.Println(exec_err.Error())
+	}
 }

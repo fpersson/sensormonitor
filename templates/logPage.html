@@ -8,33 +8,10 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <style>
-        body {
-            padding-bottom: 100px;
-        }
-        footer {
-            position: fixed;
-            bottom: 0;
-            height: 100px;
-            width: 100%;
-            background-color: #f2f2f2;
-        }
-        </style>
+        <link rel="stylesheet" href="/static/css/styles.css">
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">Demo</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="/status.html">Status</a></li>
-                    <li><a href="/settings.html">Settings</a></li>
-                    <li class="active"><a href="/log.html">Log</a></li>
-                    <li><a href="/restart.html">Restart</a></li>
-                </ul>
-            </div>
-        </nav>
+    {{ template "navbar" . }}
         <div class="container">
             <!--TODO implement log-->
             {{range .AllMessages.LogMessages}}
